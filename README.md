@@ -6,7 +6,7 @@ Experience a new dimension of coding with the "Python Visualizer" extension for 
 
 The [original project](https://github.com/dongli0x00/python-preview) was abandoned since 2018.
 
-We do not have access to a Mac, so we haven't been able to test this extension on one yet. If you're using a Mac, we’d appreciate it if you could let us know whether it works.
+We have successfully tested this extension on Windows and Linux. However, we do not have access to a Mac, so we haven't been able to test this extension on one yet. If you're using a Mac, we’d appreciate it if you could let us know whether it works.
 
 ## Functionalities and Configuration
 
