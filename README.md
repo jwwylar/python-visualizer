@@ -10,9 +10,9 @@ We do not have access to a Mac, so we haven't been able to test this extension o
 
 ## Functionalities and Configuration
 
-![Visualizer](https://raw.githubusercontent.com/jwwylar/python-visualizer/main/images/previewDemo.gif)
+![Visualizer](https://github.com/jwwylar/python-visualizer/tree/main/images/previewDemo.gif)
 
-![Setting](https://raw.githubusercontent.com/jwwylar/python-visualizer/main/images/settingDemo.gif)
+![Setting](https://github.com/jwwylar/python-visualizer/tree/main/images/settingDemo.gif)
 
 # Version 1.0.0
 
