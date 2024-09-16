@@ -1,0 +1,11 @@
+out
+**/node_modules
+.vscode-test/
+
+# *.vsix
+
+assets/index.js
+visualizer-src/node_modules
+visualizer-src/typings
+pythonFiles/pydev/__pycache__
+python-visualizer

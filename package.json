@@ -1,0 +1,527 @@
+{
+    "name": "python-visualizer",
+    "displayName": "%displayName%",
+    "description": "%description%",
+    "version": "1.0.0",
+    "icon": "pv_logo_gradient.png",
+    "publisher": "jwwylar",
+    "license": "See LICENSE.txt",
+    "homepage": "https://github.com/jwwylar/python-visualizer",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/jwwylar/python-visualizer"
+    },
+    "engines": {
+        "vscode": "^1.80.0"
+    },
+    "categories": [
+        "Visualization",       
+        "Education",
+        "Programming Languages",
+        "Debuggers",
+        "Other"
+    ],
+    "keywords": [
+        "python",
+        "visualizer",
+        "preview",
+        "visualization",
+        "python beginner",
+        "learning python",
+        "python education",
+        "python tutorial",
+        "python basics",
+        "python examples",
+        "python exercises"
+    ],
+    "activationEvents": [
+        "onWebviewPanel:pythonVisualizer"
+    ],
+    "main": "./out/extension",
+    "contributes": {
+        "commands": [
+            {
+                "command": "pythonVisualizer.showVisualizer",
+                "title": "%pythonVisualizer.showVisualizer.title%",
+                "category": "Python Visualizer",
+                "icon": {
+                    "light": "./assets/Visualizer.png",
+                    "dark": "./assets/Visualizer_inverse.png"
+                }
+            },
+            {
+                "command": "pythonVisualizer.showVisualizerToSide",
+                "title": "%pythonVisualizer.showVisualizerToSide.title%",
+                "category": "Python Visualizer",
+                "icon": {
+                    "light": "./assets/VisualizerOnRightPane_16x.png",
+                    "dark": "./assets/VisualizerOnRightPane_16x_dark.png"
+                }
+            },
+            {
+                "command": "pythonVisualizer.showLockedVisualizerToSide",
+                "title": "%pythonVisualizer.showLockedVisualizerToSide.title%",
+                "category": "Python Visualizer",
+                "icon": {
+                    "light": "./assets/VisualizerOnRightPane_16x.png",
+                    "dark": "./assets/VisualizerOnRightPane_16x_dark.png"
+                }
+            },
+            {
+                "command": "pythonVisualizer.showSource",
+                "title": "%pythonVisualizer.showSource.title%",
+                "category": "Python Visualizer",
+                "icon": {
+                    "light": "./assets/ViewSource.png",
+                    "dark": "./assets/ViewSource_inverse.png"
+                }
+            },
+            {
+                "command": "pythonVisualizer.refresh",
+                "title": "%pythonVisualizer.refresh.title%",
+                "category": "Python Visualizer",
+                "icon": {
+                    "light": "./assets/Refresh.png",
+                    "dark": "./assets/Refresh_inverse.png"
+                }
+            },
+            {
+                "command": "pythonVisualizer.toggleLock",
+                "title": "%pythonVisualizer.toggleLock.title%",
+                "category": "Python Visualizer",
+                "icon": {
+                    "light": "./assets/ToggleLock.png",
+                    "dark": "./assets/ToggleLock_inverse.png"
+                }
+            }
+        ],
+        "menus": {
+            "editor/title": [
+                {
+                    "command": "pythonVisualizer.showVisualizerToSide",
+                    "when": "editorLangId == python",
+                    "alt": "pythonVisualizer.showVisualizer",
+                    "group": "navigation"
+                },
+                {
+                    "command": "pythonVisualizer.showSource",
+                    "when": "pythonVisualizerFocus",
+                    "group": "navigation"
+                },
+                {
+                    "command": "pythonVisualizer.refresh",
+                    "when": "pythonVisualizerFocus",
+                    "group": "1_pythonVisualizer"
+                },
+                {
+                    "command": "pythonVisualizer.toggleLock",
+                    "when": "pythonVisualizerFocus",
+                    "group": "1_pythonVisualizer"
+                }
+            ],
+            "editor/title/context": [
+                {
+                    "command": "pythonVisualizer.showVisualizerToSide",
+                    "when": "resourceLangId == python",
+                    "group": "navigation"
+                }
+            ],
+            "commandPalette": [
+                {
+                    "command": "pythonVisualizer.showVisualizer",
+                    "when": "editorLangId == python",
+                    "group": "navigation"
+                },
+                {
+                    "command": "pythonVisualizer.showVisualizerToSide",
+                    "when": "editorLangId == python",
+                    "group": "navigation"
+                },
+                {
+                    "command": "pythonVisualizer.showLockedVisualizerToSide",
+                    "when": "editorLangId == python",
+                    "group": "navigation"
+                },
+                {
+                    "command": "pythonVisualizer.showSource",
+                    "when": "pythonVisualizerFocus",
+                    "group": "navigation"
+                },
+                {
+                    "command": "pythonVisualizer.toggleLock",
+                    "when": "pythonVisualizerFocus"
+                }
+            ]
+        },
+        "keybindings": [
+            {
+                "command": "pythonVisualizer.showVisualizer",
+                "key": "shift+ctrl+v",
+                "mac": "shift+cmd+v",
+                "when": "editorLangId == python"
+            },
+            {
+                "command": "pythonVisualizer.showVisualizerToSide",
+                "key": "ctrl+k v",
+                "mac": "cmd+k v",
+                "when": "editorLangId == python"
+            }
+        ],
+        "configuration": {
+            "type": "object",
+            "title": "Python Visualizer",
+            "properties": {
+                "pythonVisualizer.disableHeapNesting": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "%pythonVisualizer.disableHeapNesting.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.pythonPath": {
+                    "type": "string",
+                    "default": null,
+                    "description": "%pythonVisualizer.pythonPath.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.envFile": {
+                    "type": "string",
+                    "default": null,
+                    "description": "%pythonVisualizer.envFile.desc%",
+                    "scope": "resource"
+                },                
+                "pythonVisualizer.textualMemoryLabels": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "%pythonVisualizer.textualMemoryLabels.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.compactFuncLabels": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "%pythonVisualizer.compactFuncLabels.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.showAllFrameLabels": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "%pythonVisualizer.showAllFrameLabels.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.hideCode": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "%pythonVisualizer.hideCode.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.codAndNavWidth": {
+                    "type": "number",
+                    "default": 510,
+                    "description": "%pythonVisualizer.codAndNavWidth.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.allowAllModules": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "%pythonVisualizer.allowAllModules.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.maxExecutedLines": {
+                    "type": "number",
+                    "default": 1000000, 
+                    "description": "%pythonVisualizer.maxExecutedLines.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.cumulativeMode": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "%pythonVisualizer.cumulativeMode.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.trace": {
+                    "type": "string",
+                    "enum": [
+                        "off",
+                        "verbose"
+                    ],
+                    "default": "off",
+                    "description": "%pythonVisualizer.trace.desc%",
+                    "scope": "window"
+                },
+                "pythonVisualizer.fontFamily": {
+                    "type": "string",
+                    "default": "verdana, arial, helvetica, sans-serif",
+                    "description": "%pythonVisualizer.fontFamily.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.fontSize": {
+                    "type": "number",
+                    "default": 16,
+                    "description": "%pythonVisualizer.fontSize.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.langDisplay.fontFamily": {
+                    "type": "string",
+                    "default": "verdana, arial, helvetica, sans-serif",
+                    "description": "%pythonVisualizer.langDisplay.fontFamily.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.langDisplay.fontSize": {
+                    "type": "string",
+                    "default": 14,
+                    "description": "%pythonVisualizer.langDisplay.fontSize.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.code.fontFamily": {
+                    "type": "string",
+                    "default": "Andale mono, monospace",
+                    "description": "%pythonVisualizer.code.fontFamily.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.code.fontSize": {
+                    "type": "string",
+                    "default": 15,
+                    "description": "%pythonVisualizer.code.fontSize.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.code.lineHeight": {
+                    "type": "number",
+                    "default": 1.2,
+                    "description": "%pythonVisualizer.code.lineHeight.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.legend.fontFamily": {
+                    "type": "string",
+                    "default": "verdana, arial, helvetica, sans-serif",
+                    "description": "%pythonVisualizer.legend.fontFamily.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.legend.fontSize": {
+                    "type": "number",
+                    "default": 12,
+                    "description": "%pythonVisualizer.legend.fontSize.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.codeFooterDocs.fontFamily": {
+                    "type": "string",
+                    "default": "verdana, arial, helvetica, sans-serif",
+                    "description": "%pythonVisualizer.codeFooterDocs.fontFamily.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.codeFooterDocs.fontSize": {
+                    "type": "number",
+                    "default": 12,
+                    "description": "%pythonVisualizer.codeFooterDocs.fontSize.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.printOutputDocs.fontFamily": {
+                    "type": "string",
+                    "default": "verdana, arial, helvetica, sans-serif",
+                    "description": "%pythonVisualizer.printOutputDocs.fontFamily.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.printOutputDocs.fontSize": {
+                    "type": "number",
+                    "default": 12,
+                    "description": "%pythonVisualizer.printOutputDocs.fontSize.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.pyStdout.fontFamily": {
+                    "type": "string",
+                    "default": "Andale mono, monospace",
+                    "description": "%pythonVisualizer.pyStdout.fontFamily.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.pyStdout.fontSize": {
+                    "type": "number",
+                    "default": 14,
+                    "description": "%pythonVisualizer.pyStdout.fontSize.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.retVal.fontSize": {
+                    "type": "number",
+                    "default": 12,
+                    "description": "%pythonVisualizer.retVal.fontSize.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.stackAndHeapHeader.fontFamily": {
+                    "type": "string",
+                    "default": "erdana, arial, helvetica, sans-serif",
+                    "description": "%pythonVisualizer.stackAndHeapHeader.fontFamily.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.stackAndHeapHeader.fontSize": {
+                    "type": "number",
+                    "default": 14,
+                    "description": "%pythonVisualizer.stackAndHeapHeader.fontSize.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.stackFrame.fontFamily": {
+                    "type": "string",
+                    "default": "verdana, arial, helvetica, sans-serif",
+                    "description": "%pythonVisualizer.stackFrame.fontFamily.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.stackFrame.fontSize": {
+                    "type": "number",
+                    "default": 14,
+                    "description": "%pythonVisualizer.stackFrame.fontSize.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.stackFrameHeader.fontFamily": {
+                    "type": "string",
+                    "default": "verdana, arial, helvetica, sans-serif",
+                    "description": "%pythonVisualizer.stackFrameHeader.fontFamily.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.stackFrameHeader.fontSize": {
+                    "type": "number",
+                    "default": 14,
+                    "description": "%pythonVisualizer.stackFrameHeader.fontSize.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.heapObject.fontFamily": {
+                    "type": "string",
+                    "default": "verdana, arial, helvetica, sans-serif",
+                    "description": "%pythonVisualizer.heapObject.fontFamily.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.heapObject.fontSize": {
+                    "type": "number",
+                    "default": 14,
+                    "description": "%pythonVisualizer.heapObject.fontSize.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.typeLabel.fontFamily": {
+                    "type": "string",
+                    "default": "verdana, arial, helvetica, sans-serif",
+                    "description": "%pythonVisualizer.typeLabel.fontFamily.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.typeLabel.fontSize": {
+                    "type": "number",
+                    "default": 12,
+                    "description": "%pythonVisualizer.typeLabel.fontSize.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.light.highlightedArrow.color": {
+                    "type": "string",
+                    "default": "#005583",
+                    "description": "%pythonVisualizer.light.highlightedArrow.color.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.light.highlightedStackFrame.bgColor": {
+                    "type": "string",
+                    "default": "#e9f1f6",
+                    "description": "%pythonVisualizer.light.highlightedStackFrame.bgColor.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.light.list-tuple-setTbl.bgColor": {
+                    "type": "string",
+                    "default": "#ffffc6",
+                    "description": "%pythonVisualizer.light.list-tuple-setTbl.bgColor.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.light.dict-class-instKey.bgColor": {
+                    "type": "string",
+                    "default": "#faebbf",
+                    "description": "%pythonVisualizer.light.dict-class-instKey.bgColor.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.light.dict-class-instVal.bgColor": {
+                    "type": "string",
+                    "default": "#ffffc6",
+                    "description": "%pythonVisualizer.light.dict-class-instVal.bgColor.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.dark.highlightedArrow.color": {
+                    "type": "string",
+                    "default": "#03dac6",
+                    "description": "%pythonVisualizer.dark.highlightedArrow.color.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.dark.highlightedStackFrame.bgColor": {
+                    "type": "string",
+                    "default": "#000000",
+                    "description": "%pythonVisualizer.dark.highlightedStackFrame.bgColor.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.dark.list-tuple-setTbl.bgColor": {
+                    "type": "string",
+                    "default": "#000000",
+                    "description": "%pythonVisualizer.dark.list-tuple-setTbl.bgColor.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.dark.dict-class-instKey.bgColor": {
+                    "type": "string",
+                    "default": "#000000",
+                    "description": "%pythonVisualizer.dark.dict-class-instKey.bgColor.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.dark.dict-class-instVal.bgColor": {
+                    "type": "string",
+                    "default": "#121212",
+                    "description": "%pythonVisualizer.dark.dict-class-instVal.bgColor.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.high-contrast.highlightedArrow.color": {
+                    "type": "string",
+                    "default": "#005583",
+                    "description": "%pythonVisualizer.high-contrast.highlightedArrow.color.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.high-contrast.highlightedStackFrame.bgColor": {
+                    "type": "string",
+                    "default": "#ff7500",
+                    "description": "%pythonVisualizer.high-contrast.highlightedStackFrame.bgColor.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.high-contrast.list-tuple-setTbl.bgColor": {
+                    "type": "string",
+                    "default": "#ca6924",
+                    "description": "%pythonVisualizer.high-contrast.list-tuple-setTbl.bgColor.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.high-contrast.dict-class-instKey.bgColor": {
+                    "type": "string",
+                    "default": "#f9906f",
+                    "description": "%pythonVisualizer.high-contrast.dict-class-instKey.bgColor.desc%",
+                    "scope": "resource"
+                },
+                "pythonVisualizer.high-contrast.dict-class-instVal.bgColor": {
+                    "type": "string",
+                    "default": "#b35c44",
+                    "description": "%pythonVisualizer.high-contrast.dict-class-instVal.bgColor.desc%",
+                    "scope": "resource"
+                }
+            }
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "test": "npm run compile && node ./node_modules/vscode/bin/test",
+        "clean:python-visualizer": "gulp cleanPythonVisualizer",
+        "extract:python-visualizer": "npm run compile && gulp extractPythonVisualizer"
+    },
+    "devDependencies": {
+        "@types/vscode": "^1.80.0",
+        "@types/mocha": "^2.2.42",
+        "@types/node": "^20.4.10",
+        "del": "^3.0.0",
+        "gulp": "^4.0.2",
+        "gulp-filter": "^5.1.0",
+        "parse-semver": "^1.1.1",
+        "typescript": "^5.1.3",
+        "underscore": "^1.9.1"
+    },
+    "dependencies": {
+        "tree-kill": "^1.2.0",
+        "uint64be": "^3.0.0",
+        "python-shell": "^5.0.0"
+    },
+    "overrides": {
+    	"chokidar": "3.5.3",
+    	"glob-parent": "6.0.2"
+    }
+}
