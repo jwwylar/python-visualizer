@@ -1,6 +1,6 @@
 {
     "displayName": "Python Visualizer",
-    "description": "Visualize Your Own Code or Conquer Python with Interactive Code Visualization Exercises and Video Tutorials.",
+    "description": "Bring your Python code to life with interactive visualizations.",
     "pythonVisualizer.showVisualizer.title": "Open Visualizer",
     "pythonVisualizer.showVisualizerToSide.title": "Open Visualizer to the Side",
     "pythonVisualizer.showLockedVisualizerToSide.title": "Open Locked Visualizer to the Side",
