@@ -24,15 +24,14 @@
     "keywords": [
         "python",
         "visualizer",
-        "preview",
         "visualization",
-        "python beginner",
-        "learning python",
-        "python education",
-        "python tutorial",
-        "python basics",
-        "python examples",
-        "python exercises"
+        "learning",
+        "education",
+        "tutorial",
+        "examples",
+        "exercises",
+        "beginner",
+        "preview"
     ],
     "activationEvents": [
         "onWebviewPanel:pythonVisualizer"
