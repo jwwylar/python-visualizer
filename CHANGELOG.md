@@ -1,3 +1,6 @@
+# Version 1.0.1
+
+## Minor update to README file
 
 # Version 1.0.0
 
