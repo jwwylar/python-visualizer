@@ -2,7 +2,7 @@
     "name": "python-visualizer",
     "displayName": "%displayName%",
     "description": "%description%",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "icon": "pv_logo_gradient.png",
     "publisher": "jwwylar",
     "license": "See LICENSE.txt",
